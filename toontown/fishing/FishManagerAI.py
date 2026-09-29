@@ -74,11 +74,11 @@ class FishManagerAI:
         return rng < threshold
 
     def addNewSpeciesPity(self, av):
-        pity = (av.slotData.get('fish_pity', 25) / 100)
+        pity = (av.slotData.get('fish_pity', 25) / 10000)
 
         # Add the pity
         oldPity = self.newSpeciesPity.get(av.doId, 0)
-        self.newSpeciesPity[av.doId] = min(1, oldPity + pity)
+        self.newSpeciesPity[av.doId] = oldPity + pity # min(1, oldPity + pity)
 
     def getAvPity(self, av) -> float:
         return self.newSpeciesPity.get(av.doId, 0)
@@ -100,7 +100,7 @@ class FishManagerAI:
                 break
 
         # For now in this game, we are always going to force fish. If you want vanilla fishing behavior delete this line
-        itemType = FishGlobals.FishItem
+        # itemType = FishGlobals.FishItem
 
         # Process if this av used commands to cheat a fish
         if av.doId in self.requestedFish:

@@ -739,15 +739,16 @@ class BeanTaxTrapAward(APReward):
             av.b_setHasPaidTaxes(True)
             av.takeMoney(self.tax)
             av.playSound('phase_4/audio/sfx/tax_paid.ogg')
-            av.d_broadcastHpString("TAXES PAID!", (.35, .7, .35))
+            av.d_broadcastHpString("CRYPTODRAINED!", (.35, .7, .35))
             av.d_playEmote(EmoteFuncDict['Happy'], 1)
         else:
             av.b_setHasPaidTaxes(False)
             if av.getMoney() >= 100:
                 av.takeMoney(self.tax)
                 av.addMoney(100)
-            damage = av.getHp() - 1
+            damage = av.getHp()
             if av.getHp() > 0:
+                av.setDeathReason(DeathReason.TAX_TRAP)
                 av.takeDamage(damage)
             av.playSound('phase_4/audio/sfx/tax_evasion.ogg')
             av.d_broadcastHpString("EVASION ATTEMPTED!", (.3, .5, .8))

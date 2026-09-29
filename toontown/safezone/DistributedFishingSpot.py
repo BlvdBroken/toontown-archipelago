@@ -506,7 +506,7 @@ class DistributedFishingSpot(DistributedObject.DistributedObject, DelayDeletable
         else:
             color = 'cyan'
 
-        clean_pity = int(round(self.pity * 100))
+        clean_pity = self.pity * 100
 
         msg_parts = [
             MinimalJsonMessagePart("Fish: "),
